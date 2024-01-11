@@ -1,5 +1,7 @@
+// Initialize tasks
 let taskList = [];
 
+// Add task
 function addTask() {
     const taskInput = document.getElementById('taskInput');
     const taskText = taskInput.value.trim();
@@ -11,16 +13,19 @@ function addTask() {
     }
 }
 
+// Toggle task completion
 function toggleTask(index) {
     taskList[index].completed = !taskList[index].completed;
     renderTasks();
 }
 
+// Delete task
 function deleteTask(index) {
     taskList.splice(index, 1);
     renderTasks();
 }
 
+// Render tasks
 function renderTasks() {
     const taskListContainer = document.getElementById('taskList');
     taskListContainer.innerHTML = '';
@@ -48,3 +53,6 @@ function renderTasks() {
         taskListContainer.appendChild(li);
     });
 }
+
+// Add event listeners
+document.getElementById('addTaskButton').addEventListener('click', addTask);
