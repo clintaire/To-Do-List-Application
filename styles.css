@@ -1,3 +1,9 @@
+/* Reset */
+body, ul {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -8,20 +14,32 @@ body {
     height: 100vh;
 }
 
+/* Container */
 .container {
     text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Input */
 input {
     padding: 10px;
     margin-right: 5px;
 }
 
+/* Button */
 button {
     padding: 10px;
     cursor: pointer;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
 }
 
+/* List */
 ul {
     list-style-type: none;
     padding: 0;
@@ -37,6 +55,7 @@ li {
     align-items: center;
 }
 
+/* Completed */
 .completed {
     text-decoration: line-through;
     opacity: 0.7;
