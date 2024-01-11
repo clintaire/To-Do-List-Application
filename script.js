@@ -1,58 +1,35 @@
-// Initialize tasks
-let taskList = [];
+document.getElementById('addTaskButton').addEventListener('click', addTask);
+document.getElementById('taskList').addEventListener('click', removeTask);
 
-// Add task
 function addTask() {
-    const taskInput = document.getElementById('taskInput');
-    const taskText = taskInput.value.trim();
+    let taskInput = document.getElementById('taskInput');
+    let taskText = taskInput.value.trim();
 
-    if (taskText !== '') {
-        taskList.push({ text: taskText, completed: false });
-        taskInput.value = '';
-        renderTasks();
+    if (taskText === '') {
+        alert('Please enter a task');
+        return;
+    }
+
+    let taskList = document.getElementById('taskList');
+    let listItem = document.createElement('li');
+    listItem.textContent = taskText;
+
+    let checkBox = document.createElement('input');
+    checkBox.setAttribute('type', 'checkbox');
+
+    listItem.insertBefore(checkBox, listItem.firstChild);
+    taskList.appendChild(listItem);
+    taskInput.value = '';
+}
+
+function removeTask(event) {
+    let clickedItem = event.target;
+    let listItem = clickedItem.parentNode;
+    let taskList = listItem.parentNode;
+
+    if (clickedItem.nodeName === 'INPUT' && clickedItem.getAttribute('type') === 'checkbox') {
+        listItem.classList.toggle('completed');
+    } else if (clickedItem.nodeName === 'LI') {
+        taskList.removeChild(listItem);
     }
 }
-
-// Toggle task completion
-function toggleTask(index) {
-    taskList[index].completed = !taskList[index].completed;
-    renderTasks();
-}
-
-// Delete task
-function deleteTask(index) {
-    taskList.splice(index, 1);
-    renderTasks();
-}
-
-// Render tasks
-function renderTasks() {
-    const taskListContainer = document.getElementById('taskList');
-    taskListContainer.innerHTML = '';
-
-    taskList.forEach((task, index) => {
-        const li = document.createElement('li');
-        li.className = task.completed ? 'completed' : '';
-
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = task.completed;
-        checkbox.addEventListener('change', () => toggleTask(index));
-
-        const taskText = document.createElement('span');
-        taskText.textContent = task.text;
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.addEventListener('click', () => deleteTask(index));
-
-        li.appendChild(checkbox);
-        li.appendChild(taskText);
-        li.appendChild(deleteButton);
-
-        taskListContainer.appendChild(li);
-    });
-}
-
-// Add event listeners
-document.getElementById('addTaskButton').addEventListener('click', addTask);
