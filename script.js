@@ -1,4 +1,9 @@
 document.getElementById('addTaskButton').addEventListener('click', addTask);
+document.getElementById('taskInput').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        addTask();
+    }
+});
 document.getElementById('taskList').addEventListener('click', removeTask);
 
 function addTask() {
@@ -18,18 +23,4 @@ function addTask() {
     checkBox.setAttribute('type', 'checkbox');
 
     listItem.insertBefore(checkBox, listItem.firstChild);
-    taskList.appendChild(listItem);
-    taskInput.value = '';
-}
-
-function removeTask(event) {
-    let clickedItem = event.target;
-    let listItem = clickedItem.parentNode;
-    let taskList = listItem.parentNode;
-
-    if (clickedItem.nodeName === 'INPUT' && clickedItem.getAttribute('type') === 'checkbox') {
-        listItem.classList.toggle('completed');
-    } else if (clickedItem.nodeName === 'LI') {
-        taskList.removeChild(listItem);
-    }
-}
+   
